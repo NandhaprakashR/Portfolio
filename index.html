@@ -1,339 +1,512 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal-Portfolio</title>
-    <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- font aswome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="Stylesheet.css">
+    <title>Nandhaprakash R - Graphic Designer</title>
+    <style>
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --header-bg: #333333;
+            --nav-bg: #444444;
+            --card-bg: #ffffff;
+            --section-bg: #f4f4f4;
+            --border-color: #dddddd;
+            --hover-color: #ffd700;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --header-bg: #2c2c2c;
+            --nav-bg: #333333;
+            --card-bg: #2c2c2c;
+            --section-bg: #242424;
+            --border-color: #404040;
+            --hover-color: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .theme-toggle:hover {
+            background: white;
+            color: var(--header-bg);
+        }
+
+        nav {
+            background-color: var(--nav-bg);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            z-index: 1001;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--hover-color);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background-color: var(--section-bg);
+            animation: fadeIn 1s ease-in;
+        }
+
+        .projects {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            background: var(--card-bg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+
+        .about {
+            background-color: var(--section-bg);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .contact {
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact form {
+            max-width: 500px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact input,
+        .contact textarea {
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .contact button {
+            background-color: var(--header-bg);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .contact button:hover {
+            background-color: var(--nav-bg);
+        }
+
+        footer {
+            background-color: var(--header-bg);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .skill-bars {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .skill-bar {
+            margin: 1rem 0;
+            background-color: var(--card-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .skill-bar-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar-progress {
+            height: 10px;
+            background-color: var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background-color: var(--hover-color);
+            transition: width 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Laptop View (1024px and up) */
+        @media screen and (min-width: 1024px) {
+            .project-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .hero {
+                padding: 6rem 2rem;
+            }
+
+            .hero h3 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Tablet View (768px to 1023px) */
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h3 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Mobile View (up to 767px) */
+        @media screen and (max-width: 767px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .theme-toggle {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.3rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            header h2 {
+                font-size: 1.5rem;
+                margin-top: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 0;
+                background-color: var(--nav-bg);
+                position: absolute;
+                width: 100%;
+                top: 100%;
+                left: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                padding: 0.5rem 0;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h3 {
+                font-size: 1.8rem;
+            }
+
+            .contact form {
+                padding: 0 1rem;
+            }
+
+            .skill-bars {
+                padding: 0 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- nav bar -->
-    <header class="header">
-        <a href="#" class="logo">.Portfolio</a>
-        <nav class="navbar" id="home1" id="1">
-            <a href="#home" style="font-weight: bold;">Home</a>
-            <a href="#abt" style="font-weight: bold;">About</a>
-            <a href="#skills" style="font-weight: bold;">Skills</a>
-            <a href="#service" style="font-weight: bold;">Services</a>
-            <a href="#contact" style="font-weight: bold;">Contact</a>
-        </nav>
+    <header>
+        <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+        <div class="menu-toggle">☰</div>
+        <h2>Nandhaprakash R</h2>
+        <p>Graphic Designer</p>
     </header>
-    <!-- home content -->
-    <div class="container home1" id="home">
-        <div class="row">
-            <div class="col-lg-6">
-                <div id="home-data">
-                    <h4 class="hello">Hello,I'm</h4>
-                    <h1 class="name">Nandhaprakash R</h1>
-                    <h3 class="dev">A Web Developer</h3>
-                    <p class="para">“I’m a web developer who is passionate about creating websites that are both beautiful and functional.”</p>
-                    <div class="btn">
-                    <a href="Nandhaprakash_R_Resume.pdf" class="button-24" role="button" download="Nandha's CV" id="btn">Download CV</a> 
-                    </div>
-                    <!-- Icons -->
-                    <div class="icons">
-                        <a href="https://www.linkedin.com/in/nandha-prakash-r-7a85b1293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"  class="in"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://github.com/NandhaprakashR"  class="git"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.instagram.com/_itz_nandha___/"  class="insta"><i class="fa-brands fa-instagram" ></i></a>
-                    </div>
-                </div>
-            </div>
-                <!-- home-image -->
-                <div class="col-lg-6">
-                    <img src="IMAGES/programmers.png" class="home-img">
-                </div>
-        </div>
-    </div>
-<!-- end of home-content -->
 
-<!-- about image -->
-    <div class="container" id="abt" class="abt">
-        <div class="row align-self-center">
-            <div class="col-lg-5">
-                <div class="about-img">
-                    <img src="IMAGES/me.png" class="img-me">
-                </div>
-            </div>
-             <!-- about content -->
-            <div class="col-lg-7">
-                <div class="about-content">
-                    <h1 class="about-title">About Me</h1>
-                        <p class="about-para-1">
-                            I have a passion for web development and graphic design, and I have completed several projects using various technologies, such as HTML, CSS, JavaScript, PHP, WordPress, Adobe Illustrator, and Adobe Photoshop. I enjoy learning new skills and exploring new trends in web development and graphic design. I am also a friendly and communicative person, who can work well in a team or independently.I am always eager to learn new skills and technologies, and to challenge myself with complex and creative tasks. I am also a friendly and communicative person, who can work well in a team or independently
-                        </p>
-                        <div class="row mb-4 about-lines">
-                            <div class="col-sm-6 py-2"><h6 style="color: rgb(0, 0, 0);" class="about-qus">Name <span class="linea">     | </span> <span class="about-ans">Nandhaprakash R</span></h6></div>
-                            <div class="col-sm-6 py-2"><h6 style="color: rgb(0, 0, 0);" class="about-qus">Birthday <span class="linea"> | </span> <span class="about-ans">12 MAR 2004</span></h6></div>
-                            <div class="col-sm-6 py-2"><h6 style="color: rgb(0, 0, 0);" class="about-qus">Degree <span class="linea">   | </span> <span class="about-ans">BCA</span></h6></div>
-                           <div class="col-sm-6 py-2"><h6 style="color: rgb(0, 0, 0);" class="about-qus">Phone <span class="linea">     | </span> <span class="about-ans">9344510946</span></h6></div>
-                            <div class="col-sm-6 py-2"><h6 style="color: rgb(0, 0, 0);" class="about-qus">Email <span class="linea">    | </span> <span class="about-ans">nandhaprakash33@gmail.com</span></h6></div>
-                            <div class="col-sm-6 py-2"><h6 style="color: rgb(0, 0, 0);" class="about-qus">City <span class="linea">  | </span> <span class="about-ans">Salem</span></h6></div>
-                            <div class="col-sm-6 py-2"><h6 style="color: rgb(0, 0, 0);" class="about-qus">Freelance <span class="linea">| </span> <span class="about-ans">Available</span></h6></div>
-                            <div class="col-sm-6 py-2"><h6 style="color: rgb(0, 0, 0);" class="about-qus">Country <span class="linea">| </span> <span class="about-ans">India</span></h6></div>
-                           
-                          </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- end of about -->
-
-<!-- Skills -->
-
-<!-- Skills -->
-<div class="container" id="skills"> 
-
-  <!-- skills section title -->
-
-   <h1 style="color: #00bfff; font-weight: bold; font-size: 50px; margin-bottom: 50px; margin-top: -47px;">Skills</h1>
-
-  <!-- skills html -->
-  <div class="skillset-container">
-      <div class="skills-data" 
-          data-aos="fade-right"
-          data-aos-duration="200"
-          data-aos-once="true"
-          data-aos-easing="ease-in-out-sine" >
-      <div class="skills-name">
-          <i class="fa-brands fa-html5"></i>
-          <span class="skill-name">HTML</span>
-      </div>
-          <div> <span class="skill-percentage">90%</span></div>
-               <div class="skill-bar skill-html"></div>   
-  </div>
-
-   <!-- skills css -->
-
-   <div class="skills-data"
-          data-aos="fade-right"
-          data-aos-duration="300"
-          data-aos-once="true"
-          data-aos-easing="ease-in-out-sine">
-       <div class="skills-name">
-           <i class="fa-brands fa-css3-alt"></i>
-           <span class="skill-name">CSS</span>
-       </div>
-          <div> <span class="skill-percentage">75%</span></div>
-              <div class="skill-bar skill-css"></div>   
-   </div>
-
-      <!-- skills Bootsstrap-->
-
-   <div class="skills-data"
-          data-aos="fade-right"
-          data-aos-duration="400"
-          data-aos-once="true"
-          data-aos-easing="ease-in-out-sine">
-       <div class="skills-name">
-           <i class="fa-brands fa-bootstrap"></i>
-           <span class="skill-name">Bootstrap</span>
-       </div>
-          <div> <span class="skill-percentage">40%</span></div>
-              <div class="skill-bar skill-js"></div>   
-   </div>
-
-      <!-- skills Photoshop -->
-
-  <div class="skills-data"
-          data-aos="fade-right"
-          data-aos-duration="500"
-          data-aos-once="true"
-          data-aos-easing="ease-in-out-sine">
-       <div class="skills-name">
-           <span class="skill-name">Adobe Photoshop</span>
-       </div>
-          <div> <span class="skill-percentage">70%</span></div>
-              <div class="skill-bar skill-bootstrap"></div>   
-   </div>
-
-      
-      <!-- AE -->
-
-  <div class="skills-data"
-          data-aos="fade-right"
-          data-aos-duration="600"
-          data-aos-once="true"
-          data-aos-easing="ease-in-out-sine">
-       <div class="skills-name">
-          <span class="skill-name"> Adobe After Effects</span>
-       </div>
-           <div> <span class="skill-percentage">50%</span></div>
-              <div class="skill-bar skill-ae"></div>   
-   </div>
-
-      <!-- PR -->
-   <div class="skills-data"
-          data-aos="fade-right"
-          data-aos-duration="600"
-          data-aos-once="true"
-          data-aos-easing="ease-in-out-sine">
-       <div class="skills-name">
-          <span class="skill-name"> Adobe Premium pro</span>
-       </div>
-          <div> <span class="skill-percentage">50%</span></div>
-              <div class="skill-bar skill-pr"></div>   
-   </div>
-  </div>
-</div> 
-
-<!-- end of skills -->
-
-    <!-- Service Start -->
-    <div class="container-fluid bg-light my-5 py-6" id="service">
-      <div class="container">
-          <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
-              <div class="col-lg-6">
-                  <h1 class="display-5 mb-0" style="color:#00bfff">My Services</h1>
-              </div>
-              <div class="col-lg-6 text-lg-end">
-                  <a class="btn btn-primary py-3 px-5" href="">Hire Me</a>
-              </div>
-          </div>
-          <div class="row g-4">
-              <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                  <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
-                      <div class="bg-icon flex-shrink-0 mb-3">
-                          <i class="fa fa-crop-alt fa-2x text-dark"></i>
-                      </div>
-                      <div class="ms-sm-4">
-                          <h4 class="mb-3">Creative Design</h4>
-                          <span>Creative design is the process of using digital and physical tools to create unique and memorable visuals for a product or a brand. It involves thinking out of the box and applying artistic skills and technical knowledge</span>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                  <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
-                      <div class="bg-icon flex-shrink-0 mb-3">
-                          <i class="fa fa-code-branch fa-2x text-dark"></i>
-                      </div>
-                      <div class="ms-sm-4">
-                          <h4 class="mb-3">Graphic Design</h4>
-                          <span>Graphic design
-                            Explore
-                            Graphic design is the art of creating visual content, which includes using typography, images, colors, and shapes to communicate a message. Its ultimate goal is to make information easy to comprehend.</span>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                  <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
-                      <div class="bg-icon flex-shrink-0 mb-3">
-                          <i class="fa fa-code fa-2x text-dark"></i>
-                      </div>
-                      <div class="ms-sm-4">
-                          <h4 class="mb-3">Web Development</h4>
-                          <span>Web development is the process of creating, building, and maintaining websites and web applications. It involves both front-end and back-end aspects, such as web design, web programming, web publishing, and database management</span>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                  <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
-                      <div class="bg-icon flex-shrink-0 mb-3">
-                          <i class="fa fa-laptop-code fa-2x text-dark"></i>
-                      </div>
-                      <div class="ms-sm-4">
-                          <h4 class="mb-3">Video Editing</h4>
-                          <span>Video editing is the process of arranging, cutting, and modifying video clips to create a final product. It can be done for various purposes, such as entertainment, education, marketing, and more</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- Service End -->
-
-    <div class="background" id="contact">
-      <div class="container">
-        <div class="screen">
-          <div class="screen-header">
-            <div class="screen-header-left">
-              <div class="screen-header-button close"></div>
-              <div class="screen-header-button maximize"></div>
-              <div class="screen-header-button minimize"></div>
-            </div>
-            <div class="screen-header-right">
-              <div class="screen-header-ellipsis"></div>
-              <div class="screen-header-ellipsis"></div>
-              <div class="screen-header-ellipsis"></div>
-            </div>
-          </div>
-          <div class="screen-body">
-            <div class="screen-body-item left">
-              <div class="app-title">
-                <span>CONTACT</span>
-                <span>ME</span>
-              </div>
-              <div class="app-contact">CONTACT INFO : +91 9344510946</div>
-            </div>
-            <div class="screen-body-item">
-              <div class="app-form">
-                <div class="app-form-group">
-                  <input class="app-form-control" placeholder="NAME" value="Nandha Prakash R">
-                </div>
-                <div class="app-form-group">
-                  <input class="app-form-control" placeholder="EMAIL">
-                </div>
-                <div class="app-form-group">
-                  <input class="app-form-control" placeholder="CONTACT NO">
-                </div>
-                <div class="app-form-group message">
-                  <input class="app-form-control" placeholder="MESSAGE">
-                </div>
-                <div class="app-form-group buttons">
-                  <button class="app-form-button">CANCEL</button>
-                  <button class="app-form-button">SEND</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="credits">
-          Inspired by
-          <a class="credits-link" href="#home" target="_blank">
-            <svg class="dribbble" viewBox="0 0 200 200">
-              <g stroke="#ffffff" fill="none">
-                <circle cx="100" cy="100" r="90" stroke-width="20"></circle>
-                <path d="M62.737004,13.7923523 C105.08055,51.0454853 135.018754,126.906957 141.768278,182.963345" stroke-width="20"></path>
-                <path d="M10.3787186,87.7261455 C41.7092324,90.9577894 125.850356,86.5317271 163.474536,38.7920951" stroke-width="20"></path>
-                <path d="M41.3611549,163.928627 C62.9207607,117.659048 137.020642,86.7137169 189.041451,107.858103" stroke-width="20"></path>
-              </g>
-            </svg>
-            Nandha
-          </a>
-        </div>
-      </div>
-    </div>
-
-
-
-    <footer class="footer">
-        <ul class="social-icon">
-          <li class="social-icon__item"><a class="social-icon__link" href="#">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a></li>
-          <li class="social-icon__item"><a class="social-icon__link" href="#">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a></li>
-          <li class="social-icon__item"><a class="social-icon__link" href="#">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a></li>
-          <li class="social-icon__item"><a class="social-icon__link" href="#">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a></li>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
-        <ul class="menu">
-          <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
-          <li class="menu__item"><a class="menu__link" href="#abt">About</a></li>
-          <li class="menu__item"><a class="menu__link" href="#service1">Services</a></li>
-          <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
-          <li class="menu__item"><a class="menu__link" href="#contact">Contact</a></li>
-    
-        </ul>
-        <p>&copy;2024 Nandhaprakash R | All Rights Reserved</p>
-      </footer>
+    </nav>
 
+    <section class="hero" id="home">
+        <h3>Welcome to My Portfolio</h3>
+        <p>I create stunning visual designs and creative solutions</p>
+    </section>
+
+    <section class="projects" id="projects">
+        <h3>My Projects</h3>
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="project2.jpg" alt="Project 1">
+                <h4>Project 1</h4>
+                <p>Description of project 2</p>
+            </div>
+            <div class="project-card">
+                <img src="project3.jpg" alt="Project 2">
+                <h4>Project 2</h4>
+                <p>Description of project 3</p>
+            </div>
+            <div class="project-card">
+                <img src="project4.jpg" alt="Project 3">
+                <h4>Project 3</h4>
+                <p>Description of project 4</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h3>About Me</h3>
+        <p>I am a passionate graphic designer with experience in creating beautiful and impactful visual designs.</p>
+        
+        <div class="skill-bars">
+            <div class="skill-bar">
+                <div class="skill-bar-title">
+                    <span>Adobe Photoshop</span>
+                    <span>90%</span>
+                </div>
+                <div class="skill-bar-progress">
+                    <div class="skill-bar-fill" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="skill-bar-title">
+                    <span>Adobe Illustrator</span>
+                    <span>85%</span>
+                </div>
+                <div class="skill-bar-progress">
+                    <div class="skill-bar-fill" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-bar">
+                <div class="skill-bar-title">
+                    <span>UI/UX Design</span>
+                    <span>80%</span>
+                </div>
+                <div class="skill-bar-progress">
+                    <div class="skill-bar-fill" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h3>Contact Me</h3>
+        <form id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Nandhaprakash R. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            themeToggle.textContent = newTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('nav ul');
+
+        menuToggle.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && !e.target.closest('.menu-toggle')) {
+                navUl.classList.remove('active');
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu after clicking a link
+                navUl.classList.remove('active');
+            });
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Animate skill bars on scroll
+        function animateSkillBars() {
+            const skillSection = document.querySelector('.skill-bars');
+            const sectionPosition = skillSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight;
+
+            if(sectionPosition < screenPosition) {
+                const skillBars = document.querySelectorAll('.skill-bar-fill');
+                skillBars.forEach(bar => {
+                    const targetWidth = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = targetWidth;
+                    }, 100);
+                });
+                window.removeEventListener('scroll', animateSkillBars);
+            }
+        }
+
+        window.addEventListener('scroll', animateSkillBars);
+
+        // Project card hover effect with touch support
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+            // Add touch support
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
 </body>
-</html>
+</html> 
